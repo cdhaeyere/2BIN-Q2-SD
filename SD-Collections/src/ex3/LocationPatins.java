@@ -8,6 +8,9 @@ import java.util.Deque;
 import java.util.HashMap;
 
 public class LocationPatins {
+	
+	private static final MIN_LOCKER = 33;
+	private static final MAX_LOCKER = 48;
 
 	private HashMap<Integer, Deque<Integer>> pointures;
 	private HashMap<Integer, LocalTime> casiersOccupees;
@@ -18,7 +21,7 @@ public class LocationPatins {
 		pointures = new HashMap<>();
 		casiersOccupees = new HashMap<>();
 		for (int i = 0; i < lockers.length; i++) {
-			if (lockers[i] < 33 || lockers[i] > 48)
+			if (lockers[i] < MIN_LOCKER || lockers[i] > MAX_LOCKER)
 				throw new IllegalArgumentException();
 			if (!pointures.containsKey(lockers[i]))
 				pointures.put(lockers[i], new ArrayDeque<>());
@@ -33,7 +36,7 @@ public class LocationPatins {
 	}
 
 	public int attribuerCasierAvecPatins(int pointure) {
-		if (pointure < 33 || pointure > 48)
+		if (pointure < MIN_LOCKER || pointure > MAX_LOCKER)
 			throw new IllegalArgumentException();
 		LocalTime l = LocalTime.now();
 		if (!pointures.containsKey(pointure))
